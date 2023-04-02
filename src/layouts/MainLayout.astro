@@ -1,6 +1,7 @@
 ---
-import Footer from '../components/Footer.astro';
-import MainHead from './MainHead.astro';
+import Footer from "../components/Footer.astro";
+import Nav from "../components/Nav.astro";
+import MainHead from "./MainHead.astro";
 
 type Props = {
   metaTitle?: string;
@@ -16,7 +17,8 @@ const {
 <html lang="en">
   <MainHead {metaTitle} {description} />
   <body>
-    <slot> Default Text</slot>
+    <Nav />
+    <slot>Default Text</slot>
     <Footer />
   </body>
 </html>
