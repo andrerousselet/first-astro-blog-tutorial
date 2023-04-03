@@ -20,7 +20,7 @@ const { text, href, icon,...rest } = Astro.props as Props;
       <Icon name={icon.name} height="24" width="24" />
     )
   }
-  <span class="font-bold">{text}</span>
+  <span>{text}</span>
   {
     icon && icon.side === "right" && (
       <Icon name={icon.name} height="24" width="24" />

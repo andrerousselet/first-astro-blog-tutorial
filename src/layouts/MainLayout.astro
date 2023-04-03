@@ -18,7 +18,9 @@ const {
   <MainHead {metaTitle} {description} />
   <body class="min-h-screen grid">
     <Nav />
-    <slot>Default Text</slot>
+    <main class="w-full max-w-7xl m-auto px-4 sm:px-6 lg:px-8">
+      <slot>Default Text</slot>
+    </main>
     <Footer />
   </body>
 </html>

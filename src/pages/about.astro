@@ -1,7 +1,31 @@
 ---
+import Link from "../components/Link.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 ---
 
 <MainLayout metaTitle="About" description="My about page">
-	<h1>Hi from About</h1>
+  <section aria-label="About Me">
+    <div class="mb-6">
+      <img
+        src="/images/headshot.jpeg"
+        alt="My headshot"
+        class="rounded-3xl w-60 h-60 shadow-2xl shadow-gray-600"
+      />
+    </div>
+    <div>
+      <h1 class="text-3xl font-bold mb-2">My Blog</h1>
+      <p class="mb-2">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
+        assumenda, sint quasi consequuntur minima delectus animi cum magnam
+        harum, nulla deserunt quia natus asperiores architecto cumque iure,
+        veniam illo debitis. Repellat modi cum porro velit illo, nulla eos
+        officiis labore.
+      </p>
+      <Link
+        href="mailto:email@email.com"
+        text="E-mail me"
+        class="transition rounded-md py-1 px-4 text-gray-200 bg-primary hover:bg-primary-hover"
+      />
+    </div>
+  </section>
 </MainLayout>
