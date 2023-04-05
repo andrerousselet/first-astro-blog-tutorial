@@ -4,19 +4,19 @@ import Nav from "../components/Nav.astro";
 import MainHead from "./MainHead.astro";
 
 type Props = {
-  metaTitle?: string;
+  title?: string;
   description?: string;
 };
 
 const {
-  metaTitle = "My Astro Blog",
+  title = "My Astro Blog",
   description = "My first take on Astro framework",
 } = Astro.props as Props;
 ---
 
 <html lang="en">
-  <MainHead {metaTitle} {description} />
-  <body class="min-h-screen grid">
+  <MainHead {title} {description} />
+  <body class="min-h-screen grid bg-gray-50">
     <Nav />
     <main class="w-full max-w-7xl m-auto px-4 sm:px-6 lg:px-8">
       <slot>Default Text</slot>
