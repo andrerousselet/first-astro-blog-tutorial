@@ -1,4 +1,5 @@
 ---
+import { Image } from "@astrojs/image/components";
 import MainLayout from "./MainLayout.astro";
 import { slugify, formatDate } from "../js/utils";
 const { frontmatter } = Astro.props;
@@ -6,28 +7,35 @@ const { title, description, date, category, author, image } = frontmatter;
 ---
 
 <MainLayout {title} {description}>
-  <header class="flex flex-col items-center justify-center gap-2 my-4">
+  <header class="flex flex-col items-center justify-center gap-4 my-8">
     <div class="flex items-center justify-around">
       <a
         href={`/category/${slugify(category)}/`}
-        class="py-1 px-2 rounded uppercase text-gray-100 text-sm bg-secondary"
+        class="px-2 rounded uppercase text-gray-100 text-sm bg-secondary"
       >
         {category}
       </a>
     </div>
     <div>
-      <h1 class="text-2xl font-bold">{title}</h1>
+      <h1 class="text-2xl font-bold mb-2">{title}</h1>
       <p class="text-center">
         by
         <a
           href={`/author/${slugify(author)}/`}
-          class="underline underline-offset-2 transition hover:text-secondary"
+          class="transition hover:text-secondary"
         >
-          {author}
-        </a>
-        &bull; {formatDate(date)}
+          <span class="underline underline-offset-2">{author}</span>
+        </a>&bull; {formatDate(date)}
       </p>
     </div>
+    <Image
+      src={image.src}
+      alt={image.alt}
+      width={1280}
+      height={600}
+      format="avif"
+      class="mt-2 shadow-lg shadow-gray-300 rounded border-2 border-white"
+    />
   </header>
   <section>
     <slot />
