@@ -1,0 +1,47 @@
+---
+import { Image } from "@astrojs/image/components";
+import { slugify, formatDate } from "../js/utils";
+import Link from "./Link.astro";
+const { frontmatter, url } = Astro.props.post;
+const { title, image, date, author, description } = frontmatter;
+const width = 22;
+---
+
+<article class="p-3 rounded-md shadow-md max-w-fit bg-white">
+  <a href={url}>
+    <Image
+      src={image.src}
+      alt={image.alt}
+      width={width * 16}
+      aspectRatio={16 / 9}
+      format="webp"
+      class="rounded mb-3"
+    />
+  </a>
+  <div class=`w-[${width}rem]`>
+    <div class="mb-3">
+      <h2
+        class="mb-1 text-lg font-bold leading-tight transition hover:text-secondary"
+      >
+        <a href={url}>{title}</a>
+      </h2>
+      <p class="text-xs">
+        <span>by</span>
+        <a
+          href={`/author/${slugify(author)}/`}
+          class="transition hover:text-secondary"
+        >
+          <span class="underline underline-offset-2">{author}</span>
+        </a>
+        <span class="text-gray-700">&bull;</span>
+        {formatDate(date)}
+      </p>
+    </div>
+    <p class="text-sm mb-3">{description}</p>
+    <Link
+      text="Read Post"
+      href={url}
+      class="block text-center py-1 px-2 rounded text-gray-100 text-sm bg-secondary hover:bg-secondary-hover w-full"
+    />
+  </div>
+</article>
