@@ -3,7 +3,7 @@ import { Image } from "@astrojs/image/components";
 import { slugify, formatDate } from "../js/utils";
 import Link from "./Link.astro";
 const { frontmatter, url } = Astro.props.post;
-const { title, image, date, author, description } = frontmatter;
+const { title, image, date, author, description, category } = frontmatter;
 ---
 
 <article class="p-3 rounded-md shadow-md max-w-fit bg-white">
@@ -17,6 +17,14 @@ const { title, image, date, author, description } = frontmatter;
       class="rounded mb-3"
     />
   </a>
+  <div class="flex items-center justify-start">
+    <a
+      href={`/category/${slugify(category)}/`}
+      class="px-2 py-0.5 mb-3 rounded uppercase text-gray-100 text-xs transition bg-secondary hover:bg-primary-hover"
+    >
+      {category}
+    </a>
+  </div>
   <div class="w-96">
     <div class="mb-3">
       <h2
