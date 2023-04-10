@@ -4,7 +4,6 @@ import { slugify, formatDate } from "../js/utils";
 import Link from "./Link.astro";
 const { frontmatter, url } = Astro.props.post;
 const { title, image, date, author, description } = frontmatter;
-const width = 22;
 ---
 
 <article class="p-3 rounded-md shadow-md max-w-fit bg-white">
@@ -12,13 +11,13 @@ const width = 22;
     <Image
       src={image.src}
       alt={image.alt}
-      width={width * 16}
+      width={384}
       aspectRatio={16 / 9}
       format="webp"
       class="rounded mb-3"
     />
   </a>
-  <div class=`w-[${width}rem]`>
+  <div class="w-96">
     <div class="mb-3">
       <h2
         class="mb-1 text-lg font-bold leading-tight transition hover:text-secondary"
