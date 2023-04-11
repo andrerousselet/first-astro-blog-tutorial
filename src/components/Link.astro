@@ -9,21 +9,22 @@ type Props = {
     name: string;
     side: "left" | "right";
   };
+  size?: number
 };
 
-const { text, href, icon,...rest } = Astro.props as Props;
+const { text, href, icon, size = 24, ...rest } = Astro.props as Props;
 ---
 
 <a {href} {...rest}>
   {
     icon && icon.side === "left" && (
-      <Icon name={icon.name} height="24" width="24" />
+      <Icon name={icon.name} height={size} width={size} />
     )
   }
   <span>{text}</span>
   {
     icon && icon.side === "right" && (
-      <Icon name={icon.name} height="24" width="24" />
+      <Icon name={icon.name} height={size} width={size} />
     )
   }
 </a>
