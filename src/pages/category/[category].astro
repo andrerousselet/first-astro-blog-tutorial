@@ -4,41 +4,34 @@ import MainLayout from "../../layouts/MainLayout.astro";
 import { slugify, formatBlogPosts } from "../../js/utils";
 
 export async function getStaticPaths() {
-  return [
-    {
-      params: { category: slugify("Reference Docs") },
-      props: { name: "Reference Docs" },
-    },
-    {
-      params: { category: slugify("General") },
-      props: { name: "General" },
-    },
-    {
-      params: { category: slugify("CSS") },
-      props: { name: "CSS" },
-    },
-    {
-      params: { category: slugify("Astro") },
-      props: { name: "Astro" },
-    },
+  const posts = await Astro.glob("../blog/*.md");
+  const formattedPosts = formatBlogPosts(posts);
+  const categories = [
+    ...new Set(formattedPosts.map((post) => post.frontmatter.category).flat()),
   ];
+  return categories.map((category) => {
+    const postsByCategory = formattedPosts.filter(
+      (post) => post.frontmatter.category === category
+    );
+    return {
+      params: { category: slugify(category) },
+      props: {
+        categoryName: category,
+        posts: postsByCategory,
+      },
+    };
+  });
 }
 
 const { category } = Astro.params;
-const { name } = Astro.props;
-
-const posts = await Astro.glob("../blog/*.md");
-const formattedPosts = formatBlogPosts(posts);
-const postsByCategory = formattedPosts.filter(
-  (post) => slugify(post.frontmatter.category) === category
-)
+const { categoryName, posts } = Astro.props;
 ---
 
-<MainLayout title={`Posts about ${name}`}>
+<MainLayout title={`Posts about ${categoryName}`}>
   <h1 class="text-3xl font-bold my-8 text-center">
-    Posts about <span class="text-secondary">{name}</span>
+    Posts about <span class="text-secondary">{categoryName}</span>
   </h1>
   <section class="flex flex-wrap items-start justify-center gap-6 mb-8">
-    {postsByCategory.map((post) => <PostCard {post} />)}
+    {posts.map((post) => <PostCard {post} />)}
   </section>
 </MainLayout>
